@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import { Command } from "commander"
+import { cwd } from 'node:process';
+import path from 'path';
 import fs from 'fs';
 const program = new Command();
 
