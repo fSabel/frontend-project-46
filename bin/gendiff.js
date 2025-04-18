@@ -12,13 +12,16 @@ const genDiff = () => {
         .version('1.0.0', '-V, --version', 'output the version number')
         .option('-f, --format [type]', 'output format')
         .action((filepath1, filepath2) => {
-            console.log("parsing a file1.json", parsing(filepath1));
-            console.log("parsing a file2.json", parsing(filepath2));
+            const file1 = parsing(filepath1);
+            const file2 = parsing(filepath2);
+            console.log(file1, file2)
         })
 
-    program.parse();
+    program.parse(process.argv);
 
     return program;
 };
+
+genDiff();
 
 export default genDiff;
