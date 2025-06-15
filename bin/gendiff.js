@@ -1,25 +1,21 @@
 #!/usr/bin/env node
-import { Command } from "commander";
-import parsing from "../modules/parsing.js";
+import { Command } from 'commander';
+import search from '../modules/search.js';
 
 const genDiff = () => {
-    const program = new Command();
+  const program = new Command();
 
-    program
-        .argument('<filepath1>')
-        .argument('<filepath2>')
-        .description('Compares two configuration files and shows a difference.')
-        .version('1.0.0', '-V, --version', 'output the version number')
-        .option('-f, --format [type]', 'output format')
-        .action((filepath1, filepath2) => {
-            const file1 = parsing(filepath1);
-            const file2 = parsing(filepath2);
-            console.log(file1, file2)
-        })
+  program
+    .argument('<filepath1>')
+    .argument('<filepath2>')
+    .description('Compares two configuration files and shows a difference.')
+    .version('1.0.0', '-V, --version', 'output the version number')
+    .option('-f, --format [type]', 'output format')
+    .action((filepath1, filepath2) => console.log(search(filepath1, filepath2)));
 
-    program.parse(process.argv);
+  program.parse(process.argv);
 
-    return program;
+  return program;
 };
 
 genDiff();
