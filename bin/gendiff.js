@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import search from '../modules/search.js';
+import search from '../src/search.js';
 
 const genDiff = () => {
   const program = new Command();
