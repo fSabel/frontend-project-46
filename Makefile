@@ -4,6 +4,9 @@ install: # The first cloning of the project
 lint: # Launching the linter
 	npx eslint .
 
+test: # Testing
+	npm run test
+
 link: # Launching the npm-package
 	npm link
 
