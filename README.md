@@ -1,6 +1,6 @@
 ### Hexlet tests and linter status:
 
-[![Actions Status](https://github.com/fSabel/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/fSabel/frontend-project-46/actions)
+[![Build](https://github.com/fSabel/frontend-project-46/actions/workflows/build.yml/badge.svg)](https://github.com/fSabel/frontend-project-46/actions/workflows/build.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fSabel_frontend-project-46&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fSabel_frontend-project-46)
 <a href="https://codeclimate.com/github/fSabel/frontend-project-46/maintainability"><img src="https://api.codeclimate.com/v1/badges/2dd5ca748a1bdcdd0b20/maintainability" /></a>
 
