@@ -10,9 +10,9 @@ const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', 
 const readFixtureFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
 test('gendiff', () => {
-  const readFirstFile = readFixtureFile('file1.json');
-  const readSecondFile = readFixtureFile('file2.json');
+  const pathFirstFile = getFixturePath('file1.json');
+  const pathSecondFile = getFixturePath('file2.json');
   const expected = readFixtureFile('result.txt');
 
-  expect(search(readFirstFile, readSecondFile)).toEqual(expected);
+  expect(search(pathFirstFile, pathSecondFile)).toEqual(expected);
 });
