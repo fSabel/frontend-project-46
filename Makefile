@@ -5,7 +5,7 @@ lint: # Launching the linter
 	npx eslint .
 
 test: # Testing
-	npm run test
+	npm run test:watch
 
 link: # Launching the npm-package
 	npm link
