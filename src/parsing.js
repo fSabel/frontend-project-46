@@ -4,7 +4,7 @@ import yaml from 'js-yaml';
 import path from 'path';
 
 const parsing = (fileIsStr) => {
-  const filePath = path.resolve(`${cwd()}`, `${fileIsStr}`);
+  const filePath = path.resolve(`${cwd()}`, '__fixtures__', `${fileIsStr}`);
   const fileFormat = path.extname(filePath).slice(1);
   if (fileFormat === 'json') {
     const fileIsJSON = JSON.parse(fs.readFileSync(filePath, 'utf8'));
