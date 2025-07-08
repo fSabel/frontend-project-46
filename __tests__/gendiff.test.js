@@ -12,7 +12,7 @@ const readFixtureFile = (filename) => fs.readFileSync(getFixturePath(filename), 
 test('gendiff', () => {
   const pathFirstFile = getFixturePath('file1.json');
   const pathSecondFile = getFixturePath('file2.json');
-  const expected = readFixtureFile('result.txt');
+  const expected = readFixtureFile('result.txt').trim();
 
   expect(search(pathFirstFile, pathSecondFile)).toEqual(expected);
 });
