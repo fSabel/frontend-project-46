@@ -8,4 +8,5 @@
 <h2>Asciinema</h2>
 <ul>
     <li><a href="https://asciinema.org/a/G23OBmh9CGnFx5KrLFTLgUU7O" target="_blank">Comparison of flat files (JSON)</a></li>
+    <li><a href="https://asciinema.org/a/AqZxL0T0xieNklSdvc6mjsXey" target="_blank">Comparison of flat files (YAML)</a></li>
 </ul>
