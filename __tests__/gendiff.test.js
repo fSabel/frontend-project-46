@@ -13,7 +13,7 @@ test.each([
   ['file1.json', 'file2.json', 'resultJSON.txt'],
   ['file1.yaml', 'file2.yml', 'resultYAML.txt'],
   ['file1.json', 'file2.yml', 'resultYamlJson.txt'],
-])('gendiff', ([a, b, result]) => {
+])('gendiff', (a, b, result) => {
   const pathFirstFile = getFixturePath(a);
   const pathSecondFile = getFixturePath(b);
   const expected = readFixtureFile(result).trim();
