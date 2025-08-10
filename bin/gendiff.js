@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import search from '../src/search.js';
+import searchDiff from '../src/search.js';
 
 const genDiff = () => {
   const program = new Command();
@@ -11,7 +11,7 @@ const genDiff = () => {
     .description('Compares two configuration files and shows a difference.')
     .version('1.0.0', '-V, --version', 'output the version number')
     .option('-f, --format [type]', 'output format')
-    .action((filepath1, filepath2) => console.log(search(filepath1, filepath2)));
+    .action((filepath1, filepath2) => console.log(searchDiff(filepath1, filepath2)));
 
   program.parse(process.argv);
 

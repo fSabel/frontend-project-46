@@ -1,39 +1,53 @@
-import _ from 'lodash';
 import parsing from './parsing.js';
 
-const formatValue = (value) => {
-  if (typeof value === 'boolean' || value === null) {
-    return String(value);
+function formatValue(value, depth) {
+  if (typeof value === 'object' && value !== null) {
+    const indent = '.'.repeat(depth * 4 + 4);
+    const closingIndent = '.'.repeat(depth * 4);
+    const lines = Object.entries(value)
+      .map(([k, v]) => `${indent}${k}: ${formatValue(v, depth + 1)}`);
+    return `{\n${lines.join('\n')}\n${closingIndent}}`;
   }
-  return value;
-};
+  return String(value);
+}
 
-const search = (filepath1, filepath2) => {
+const searchDiff = (filepath1, filepath2) => {
   const obj1 = parsing(filepath1);
   const obj2 = parsing(filepath2);
+  console.log(obj1);
+  console.log(obj2);
+  function diff(object1, object2, depth = 0) {
+    const keys = Array.from(new Set([...Object.keys(object1 || {}), ...Object.keys(object2 || {})]))
+      .toSorted((a, b) => a.localeCompare(b));
+    const indent = '.'.repeat(depth * 4);
+    const result = keys.flatMap((key) => {
+      const val1 = object1?.[key];
+      const val2 = object2?.[key];
+      const isObj1 = typeof val1 === 'object' && val1 !== null;
+      const isObj2 = typeof val2 === 'object' && val2 !== null;
 
-  const allKeys = _.sortBy(_.union(_.keys(obj1), _.keys(obj2)));
-
-  const lines = allKeys.flatMap((key) => {
-    const hasKey1 = Object.hasOwn(obj1, key);
-    const hasKey2 = Object.hasOwn(obj2, key);
-
-    if (hasKey1 && hasKey2) {
-      if (obj1[key] === obj2[key]) {
-        return [`  ${key}: ${formatValue(obj1[key])}`];
+      if (!(key in object2)) {
+        return [`${indent} - ${key}: ${formatValue(val1, depth + 1)}`];
       }
-      return [
-        `- ${key}: ${formatValue(obj1[key])}`,
-        `+ ${key}: ${formatValue(obj2[key])}`,
-      ];
-    }
-    if (hasKey1) {
-      return [`- ${key}: ${formatValue(obj1[key])}`];
-    }
-    return [`+ ${key}: ${formatValue(obj2[key])}`];
-  });
+      if (!(key in object1)) {
+        return [`${indent} + ${key}: ${formatValue(val2, depth + 1)}`];
+      }
+      if (isObj1 && isObj2) {
+        return [`${indent}   ${key}: ${diff(val1, val2, depth + 1)}`];
+      }
+      if (val1 !== val2) {
+        return [
+          `${indent} - ${key}: ${formatValue(val1, depth + 1)}`,
+          `${indent} + ${key}: ${formatValue(val2, depth + 1)}`,
+        ];
+      }
+      return [`${indent}   ${key}: ${formatValue(val1, depth + 1)}`];
+    });
 
-  return `{\n${lines.map((line) => `  ${line}`).join('\n')}\n}`;
+    return `{\n${result.join('\n')}\n${indent}}`;
+  }
+
+  return diff(obj1, obj2);
 };
 
-export default search;
+export default searchDiff;
