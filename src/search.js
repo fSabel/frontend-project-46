@@ -1,4 +1,4 @@
-import parsing from './parsing.js';
+import parsing from './index.js';
 
 function formatValue(value, depth) {
   if (typeof value === 'object' && value !== null) {
@@ -14,8 +14,6 @@ function formatValue(value, depth) {
 const searchDiff = (filepath1, filepath2) => {
   const obj1 = parsing(filepath1);
   const obj2 = parsing(filepath2);
-  console.log(obj1);
-  console.log(obj2);
   function diff(object1, object2, depth = 0) {
     const keys = Array.from(new Set([...Object.keys(object1 || {}), ...Object.keys(object2 || {})]))
       .toSorted((a, b) => a.localeCompare(b));
