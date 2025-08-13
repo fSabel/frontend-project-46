@@ -9,4 +9,5 @@
 <ul>
     <li><a href="https://asciinema.org/a/G23OBmh9CGnFx5KrLFTLgUU7O" target="_blank">Comparison of flat files (JSON)</a></li>
     <li><a href="https://asciinema.org/a/AqZxL0T0xieNklSdvc6mjsXey" target="_blank">Comparison of flat files (YAML)</a></li>
+    <li><a href="https://asciinema.org/a/DPd68varyDjrkCJtd8AjRQtZ4" target="_blank">Recursive comparison</a></li>
 </ul>
