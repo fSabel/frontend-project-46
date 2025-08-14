@@ -4,8 +4,9 @@ function formatValue(value, depth) {
   if (typeof value === 'object' && value !== null) {
     const indent = '.'.repeat(depth * 4 + 4);
     const closingIndent = '.'.repeat(depth * 4);
-    const lines = Object.entries(value)
-      .map(([k, v]) => `${indent}${k}: ${formatValue(v, depth + 1)}`);
+    const lines = Object.entries(value).map(
+      ([k, v]) => `${indent}${k}: ${formatValue(v, depth + 1)}`,
+    );
     return `{\n${lines.join('\n')}\n${closingIndent}}`;
   }
   return String(value);
@@ -14,9 +15,11 @@ function formatValue(value, depth) {
 const searchDiff = (filepath1, filepath2) => {
   const obj1 = parsing(filepath1);
   const obj2 = parsing(filepath2);
+
   function diff(object1, object2, depth = 0) {
-    const keys = Array.from(new Set([...Object.keys(object1 || {}), ...Object.keys(object2 || {})]))
-      .toSorted((a, b) => a.localeCompare(b));
+    const keys = Array.from(
+      new Set([...Object.keys(object1 || {}), ...Object.keys(object2 || {})]),
+    ).toSorted((a, b) => a.localeCompare(b));
     const indent = '.'.repeat(depth * 4);
     const result = keys.flatMap((key) => {
       const val1 = object1?.[key];
