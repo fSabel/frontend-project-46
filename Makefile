@@ -4,7 +4,10 @@ install: # The first cloning of the project
 lint: # Launching the linter
 	npx eslint .
 
-test: # Testing
+test: # Testing CI
+	npm run test:ci
+
+test-watch: # Testing local
 	npm run test:watch
 
 link: # Launching the npm-package

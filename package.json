@@ -5,7 +5,8 @@
   "main": "bin/gendiff.js",
   "description": "[![Actions Status](https://github.com/fSabel/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/fSabel/frontend-project-46/actions)",
   "scripts": {
-    "test:watch": "jest"
+    "test:watch": "jest --watch",
+    "test:ci": "jest --coverage"
   },
   "license": "ISC",
   "bin": {
