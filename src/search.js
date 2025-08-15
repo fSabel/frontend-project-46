@@ -16,7 +16,8 @@ const searchDiff = (filepath1, filepath2) => {
   const obj1 = parsing(filepath1);
   const obj2 = parsing(filepath2);
 
-  function diff(object1, object2, depth = 0) {
+  /** A function for finding differences in the "stylish" format */
+  function diffStylish(object1, object2, depth = 0) {
     const keys = Array.from(
       new Set([...Object.keys(object1 || {}), ...Object.keys(object2 || {})]),
     ).toSorted((a, b) => a.localeCompare(b));
@@ -34,7 +35,7 @@ const searchDiff = (filepath1, filepath2) => {
         return [`${indent} + ${key}: ${formatValue(val2, depth + 1)}`];
       }
       if (isObj1 && isObj2) {
-        return [`${indent}   ${key}: ${diff(val1, val2, depth + 1)}`];
+        return [`${indent}   ${key}: ${diffStylish(val1, val2, depth + 1)}`];
       }
       if (val1 !== val2) {
         return [
@@ -48,7 +49,10 @@ const searchDiff = (filepath1, filepath2) => {
     return `{\n${result.join('\n')}\n${indent}}`;
   }
 
-  return diff(obj1, obj2);
+  /** A function for finding differences in the "plain" format */
+  // function diffPlain(object1, object2) {}
+
+  return diffStylish(obj1, obj2);
 };
 
 export default searchDiff;
