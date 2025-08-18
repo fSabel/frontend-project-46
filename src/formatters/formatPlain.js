@@ -10,7 +10,6 @@ function diffPlain(obj1, obj2, parentPath = '') {
   const keys = Array.from(
     new Set([...Object.keys(obj1 || {}), ...Object.keys(obj2 || {})]),
   ).toSorted((a, b) => a.localeCompare(b));
-
   const result = keys.flatMap((key) => {
     const val1 = obj1?.[key];
     const val2 = obj2?.[key];
@@ -45,7 +44,7 @@ function diffPlain(obj1, obj2, parentPath = '') {
     return [];
   });
 
-  return result;
+  return result.join('\n');
 }
 
 export default diffPlain;

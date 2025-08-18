@@ -12,6 +12,7 @@ function formatValue(value, depth) {
 
 /** A function for finding differences in the "stylish" format */
 function diffStylish(object1, object2, depth = 0) {
+  console.log(typeof object2);
   const keys = Array.from(
     new Set([...Object.keys(object1 || {}), ...Object.keys(object2 || {})]),
   ).toSorted((a, b) => a.localeCompare(b));

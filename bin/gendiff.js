@@ -6,12 +6,12 @@ const genDiff = () => {
   const program = new Command();
 
   program
-    .arguments(['formatName', 'filepath1', 'filepath2'])
+    .arguments('<filepath1> <filepath2>')
     .description('Compares two configuration files and shows a difference.')
     .version('1.0.0', '-V, --version', 'output the version number')
-    .option('-f, --format [type]', 'stylish')
-    .action((formatName, filepath1, filepath2) =>
-      console.log(searchDiff(formatName, filepath1, filepath2)),
+    .option('-f, --format <type>', 'add a format', 'stylish')
+    .action((filepath1, filepath2, options) =>
+      console.log(searchDiff(options.format, filepath1, filepath2)),
     );
 
   program.parse(process.argv);
