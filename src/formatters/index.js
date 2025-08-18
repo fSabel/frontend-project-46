@@ -9,4 +9,5 @@ const searchDiff = (formatName = 'stylish', filepath1, filepath2) => {
   return diffStylish(obj1, obj2);
 };
 
+console.log(searchDiff('file1.json', undefined));
 export default searchDiff;
