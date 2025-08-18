@@ -4,17 +4,18 @@ import yaml from 'js-yaml';
 import path from 'path';
 
 const parsing = (fileIsStr) => {
-  const filePath = path.resolve(`${cwd()}`, '__fixtures__', `${fileIsStr}`);
+  const filePath = path.resolve(`${cwd()}`, '__fixtures__', fileIsStr);
   const fileFormat = path.extname(filePath).slice(1);
+  const fileContent = fs.readFileSync(filePath, 'utf8');
+
   switch (fileFormat) {
-  case 'json':
-    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-  case 'yaml':
-    return yaml.load(fs.readFileSync(filePath, 'utf8'));
-  case 'yml':
-    return yaml.load(fs.readFileSync(filePath, 'utf8'));
-  default:
-    return 'This file has an incorrect format.';
+    case 'json':
+      return JSON.parse(fileContent);
+    case 'yaml':
+    case 'yml':
+      return yaml.load(fileContent);
+    default:
+      throw new Error(`This file has an incorrect format: .${fileFormat}`);
   }
 };
 

@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 function formatValue(value) {
   if (value === null) return 'null';
   if (typeof value === 'string') return `'${value}'`;
@@ -7,9 +9,9 @@ function formatValue(value) {
 
 /** A function for finding differences in the "plain" format */
 function diffPlain(obj1, obj2, parentPath = '') {
-  const keys = Array.from(
-    new Set([...Object.keys(obj1 || {}), ...Object.keys(obj2 || {})]),
-  ).toSorted((a, b) => a.localeCompare(b));
+  const keys = _.uniq([...Object.keys(obj1), ...Object.keys(obj2)]).toSorted(
+    (a, b) => a.localeCompare(b),
+  );
   const result = keys.flatMap((key) => {
     const val1 = obj1?.[key];
     const val2 = obj2?.[key];
@@ -32,7 +34,6 @@ function diffPlain(obj1, obj2, parentPath = '') {
       return diffPlain(val1, val2, currentPath);
     }
 
-    // Свойство обновлено
     if (val1 !== val2) {
       return [
         `Property '${currentPath}' was updated. From ${formatValue(

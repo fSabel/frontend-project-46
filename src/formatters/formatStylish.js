@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 function formatValue(value, depth) {
   if (typeof value === 'object' && value !== null) {
     const indent = '.'.repeat(depth * 4 + 4);
@@ -11,22 +13,22 @@ function formatValue(value, depth) {
 }
 
 /** A function for finding differences in the "stylish" format */
-function diffStylish(object1, object2, depth = 0) {
-  console.log(typeof object2);
-  const keys = Array.from(
-    new Set([...Object.keys(object1 || {}), ...Object.keys(object2 || {})]),
-  ).toSorted((a, b) => a.localeCompare(b));
+function diffStylish(obj1, obj2, depth = 0) {
+  const keys = _.uniq([...Object.keys(obj1), ...Object.keys(obj2)]).toSorted(
+    (a, b) => a.localeCompare(b),
+  );
   const indent = '.'.repeat(depth * 4);
   const result = keys.flatMap((key) => {
-    const val1 = object1?.[key];
-    const val2 = object2?.[key];
+    const val1 = obj1?.[key];
+    const val2 = obj2?.[key];
+
     const isObj1 = typeof val1 === 'object' && val1 !== null;
     const isObj2 = typeof val2 === 'object' && val2 !== null;
 
-    if (!(key in object2)) {
+    if (!(key in obj2)) {
       return [`${indent} - ${key}: ${formatValue(val1, depth + 1)}`];
     }
-    if (!(key in object1)) {
+    if (!(key in obj1)) {
       return [`${indent} + ${key}: ${formatValue(val2, depth + 1)}`];
     }
     if (isObj1 && isObj2) {
