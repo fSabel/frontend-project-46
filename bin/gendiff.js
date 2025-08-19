@@ -9,12 +9,12 @@ const genDiff = () => {
     .arguments('<filepath1> <filepath2>')
     .description('Compares two configuration files and shows a difference.')
     .version('1.0.0', '-V, --version', 'output the version number')
-    .option('-f, --format <type>', 'add a format', 'stylish')
+    .option('-f, --format <type>', 'output format', 'stylish')
     .action((filepath1, filepath2, options) =>
       console.log(searchDiff(options.format, filepath1, filepath2)),
     );
 
-  program.parse(process.argv);
+  program.parse();
 
   return program;
 };

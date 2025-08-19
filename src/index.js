@@ -9,13 +9,11 @@ const parsing = (fileIsStr) => {
   const fileContent = fs.readFileSync(filePath, 'utf8');
 
   switch (fileFormat) {
-    case 'json':
-      return JSON.parse(fileContent);
     case 'yaml':
     case 'yml':
       return yaml.load(fileContent);
     default:
-      throw new Error(`This file has an incorrect format: .${fileFormat}`);
+      return JSON.parse(fileContent);
   }
 };
 

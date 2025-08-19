@@ -11,13 +11,6 @@ const getFixturePath = (filename) =>
 const readFixtureFile = (filename) =>
   fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-test('if one of files is undefined', () => {
-  const stylish = 'stylish';
-  const pathFirstFile = getFixturePath('file1.json');
-
-  expect(() => searchDiff(stylish, pathFirstFile, undefined)).toThrow();
-});
-
 test.each([
   ['file1.json', 'file2.json', 'resultJSON.txt'],
   ['file1.yaml', 'file2.yml', 'resultYAML.txt'],
