@@ -4,10 +4,6 @@ import yaml from 'js-yaml';
 import path from 'path';
 
 const parsing = (fileIsStr) => {
-  if (typeof fileIsStr !== 'string' || fileIsStr.trim() === '') {
-    throw new Error('File name must be a non-empty string');
-  }
-
   const filePath = path.resolve(`${cwd()}`, '__fixtures__', fileIsStr);
   const fileFormat = path.extname(filePath).slice(1);
   const fileContent = fs.readFileSync(filePath, 'utf8');
