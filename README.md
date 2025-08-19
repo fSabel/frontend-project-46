@@ -17,7 +17,7 @@
     <li>To identify syntactic and logical errors, use the - <code>make lint</code> command.</li>
     <li>To test the functionality, use the - <code>make test</code> command.</li>
 </ol>
-<p>This project is used to find differences in two different structures. To run, enter the command - <code>gendiff <filepath1> <filepath2></code></p>
+<p>This project is used to find differences in two different structures.<br /> To run, enter the command - <code>gendiff filepath1 filepath2</code></p>
 <h2>Asciinema</h2>
 <ul>
     <li><a href="https://asciinema.org/a/G23OBmh9CGnFx5KrLFTLgUU7O" target="_blank">Comparison of flat files (JSON)</a></li>
