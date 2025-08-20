@@ -1,5 +1,14 @@
 import _ from 'lodash';
 
+// const formattedValue = (value, type) => {
+//   if (typeof value === 'object') {
+//     const [k, v] = Object.entries(value)
+//     return { key: k, type, value: v}
+//   }
+
+//   return {}
+// }
+
 /** A function for finding differences in the "stylish" format */
 function json(obj1, obj2) {
   const keys = _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2)));
@@ -24,7 +33,7 @@ function json(obj1, obj2) {
       result[key] = val1;
     }
   });
-
+  console.log(result);
   return result;
 }
 
