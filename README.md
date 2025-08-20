@@ -24,4 +24,5 @@
     <li><a href="https://asciinema.org/a/AqZxL0T0xieNklSdvc6mjsXey" target="_blank">Comparison of flat files (YAML)</a></li>
     <li><a href="https://asciinema.org/a/DPd68varyDjrkCJtd8AjRQtZ4" target="_blank">Recursive comparison</a></li>
     <li><a href="https://asciinema.org/a/zh2KLSQKOkYMzURKsp0K1GtZH" target="_blank">Flat format</a></li>
+    <li><a href="https://asciinema.org/a/XlS3HkWb0Lh425Bg1TKisP1FP" target="_blank">Output in json</a></li>
 </ul>
