@@ -17,7 +17,13 @@
     <li>To identify syntactic and logical errors, use the - <code>make lint</code> command.</li>
     <li>To test the functionality, use the - <code>make test</code> command.</li>
 </ol>
-<p>This project is used to find differences in two different structures.<br /> To run, enter the command - <code>gendiff filepath1 filepath2</code></p>
+<p>This project is used to find differences in two different structures in various formats.<br /> To see the differences in one of the formats, set the "--format" flag.
+  <ul>
+    <li>The "stylish" or default format - <code>gendiff filepath1 filepath2 or gendiff --format stylish filepath1 filepath2</code></li>
+    <li>The "plain" format - <code>gendiff --format plain filepath1 filepath2</code></li>
+    <li>The "json" format - <code>gendiff -- format json filepath1 filepath2</code></li>
+  </ul>
+</p>
 <h2>Asciinema</h2>
 <ul>
     <li><a href="https://asciinema.org/a/G23OBmh9CGnFx5KrLFTLgUU7O" target="_blank">Comparison of flat files (JSON)</a></li>
