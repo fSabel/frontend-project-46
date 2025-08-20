@@ -12,9 +12,9 @@ const readFixtureFile = (filename) =>
   fs.readFileSync(getFixturePath(filename), 'utf-8');
 
 test.each([
-  ['file1.json', 'file2.json', 'resultJSON.txt'],
-  ['file1.yaml', 'file2.yml', 'resultYAML.txt'],
-  ['file1.json', 'file2.yml', 'resultYamlJson.txt'],
+  ['file1.json', 'file2.json', 'stylishJSON.txt'],
+  ['file1.yaml', 'file2.yml', 'stylishYaml.txt'],
+  ['file1.json', 'file2.yml', 'stylishYamlJson.txt'],
 ])('gendiff with "stylish" format', (a, b, result) => {
   const stylish = 'stylish';
   const pathFirstFile = getFixturePath(a);
@@ -25,9 +25,9 @@ test.each([
 });
 
 test.each([
-  ['file1.json', 'file2.json', 'resultPlain.txt'],
-  ['file1.yaml', 'file2.yml', 'resultPlain.txt'],
-  ['file1.json', 'file2.yml', 'resultPlain.txt'],
+  ['file1.json', 'file2.json', 'plain.txt'],
+  ['file1.yaml', 'file2.yml', 'plain.txt'],
+  ['file1.json', 'file2.yml', 'plain.txt'],
 ])('gendiff with "plain" format', (a, b, result) => {
   const plain = 'plain';
   const pathFirstFile = getFixturePath(a);
@@ -35,4 +35,17 @@ test.each([
   const expected = readFixtureFile(result).trim();
 
   expect(searchDiff(plain, pathFirstFile, pathSecondFile)).toEqual(expected);
+});
+
+test.each([
+  ['file1.json', 'file2.json', 'json.txt'],
+  ['file1.yaml', 'file2.yml', 'json.txt'],
+  ['file1.json', 'file2.yml', 'json.txt'],
+])('gendiff with "json" format', (a, b, result) => {
+  const stylish = 'json';
+  const pathFirstFile = getFixturePath(a);
+  const pathSecondFile = getFixturePath(b);
+  const expected = readFixtureFile(result).trim();
+
+  expect(searchDiff(stylish, pathFirstFile, pathSecondFile)).toEqual(expected);
 });
