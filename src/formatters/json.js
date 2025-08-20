@@ -1,39 +1,21 @@
 import _ from 'lodash';
 
-// const formattedValue = (value, type) => {
-//   if (typeof value === 'object') {
-//     const [k, v] = Object.entries(value)
-//     return { key: k, type, value: v}
-//   }
-
-//   return {}
-// }
-
 /** A function for finding differences in the "stylish" format */
 function json(obj1, obj2) {
   const keys = _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2)));
-  const result = {};
-
-  keys.forEach((key) => {
+  const result = keys.map((key) => {
     const val1 = obj1?.[key];
     const val2 = obj2?.[key];
 
-    const isObj1 = typeof val1 === 'object' && val1 !== null;
-    const isObj2 = typeof val2 === 'object' && val2 !== null;
+    if (_.isPlainObject(val1) && _.isPlainObject(val2))
+      return { key, type: 'nested', children: json(val1, val2) };
+    if (!(key in obj2)) return { key, type: 'deleted', val1 };
+    if (!(key in obj1)) return { key, type: 'added', val2 };
+    if (val1 !== val2) return { key, type: 'changed', val1, val2 };
 
-    if (!(key in obj2)) {
-      result[key] = val1;
-    } else if (!(key in obj1)) {
-      result[key] = val2;
-    } else if (isObj1 && isObj2) {
-      result[key] = json(val1, val2);
-    } else if (val1 !== val2) {
-      result[key] = [val1, val2];
-    } else {
-      result[key] = val1;
-    }
+    return { key, type: 'unchanged', val1 };
   });
-  console.log(result);
+
   return result;
 }
 

@@ -17,5 +17,4 @@ const diff = (formatName, filepath1, filepath2) => {
       throw new Error('Uncorrect format!');
   }
 };
-console.log(diff('json', 'file1.json', 'file2.json'));
 export default diff;
