@@ -6,7 +6,8 @@ const genDiff = () => {
   const program = new Command();
 
   program
-    .arguments('<filepath1> <filepath2>')
+    .argument('<filepath1>')
+    .argument('<filepath2>')
     .description('Compares two configuration files and shows a difference.')
     .version('1.0.0', '-V, --version', 'output the version number')
     .option('-f, --format <type>', 'output format', 'stylish')
@@ -14,7 +15,7 @@ const genDiff = () => {
       console.log(diff(options.format, filepath1, filepath2)),
     );
 
-  program.parse();
+  program.parse(process.argv);
 
   return program;
 };
