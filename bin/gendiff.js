@@ -14,7 +14,7 @@ const cliProgram = () => {
     .version('1.0.0', '-V, --version', 'output the version number')
     .option('-f, --format <type>', 'output format', 'stylish')
     .action((filepath1, filepath2, options) =>
-      console.log(diff(options.format, filepath1, filepath2)),
+      console.log(genDiff(options.format, filepath1, filepath2)),
     );
 
   return program;
