@@ -2,7 +2,10 @@
 import { Command } from 'commander';
 import diff from '../src/formatters/index.js';
 
-const genDiff = () => {
+const genDiff = (filepath1, filepath2, format = 'stylish') =>
+  diff(format, filepath1, filepath2);
+
+const cliProgram = () => {
   const program = new Command();
 
   program
@@ -14,11 +17,12 @@ const genDiff = () => {
       console.log(diff(options.format, filepath1, filepath2)),
     );
 
-  program.parse(process.argv);
-
   return program;
 };
 
-genDiff();
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const program = cliProgram();
+  program.parse(process.argv);
+}
 
 export default genDiff;
