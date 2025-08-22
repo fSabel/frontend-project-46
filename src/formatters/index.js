@@ -17,4 +17,6 @@ const diff = (formatName, filepath1, filepath2) => {
       throw new Error('Uncorrect format!');
   }
 };
-export default diff;
+
+export default (filepath1, filepath2, format = 'stylish') =>
+  diff(format, filepath1, filepath2);
