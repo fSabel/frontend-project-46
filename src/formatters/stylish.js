@@ -20,24 +20,18 @@ function diffStylish(obj1, obj2, depth = 0) {
     const val1 = obj1?.[key];
     const val2 = obj2?.[key];
 
-    const isObj1 = typeof val1 === 'object' && val1 !== null;
-    const isObj2 = typeof val2 === 'object' && val2 !== null;
-
-    if (!(key in obj2)) {
-      return [`${indent}  - ${key}: ${formatValue(val1, depth + 1)}`];
-    }
-    if (!(key in obj1)) {
-      return [`${indent}  + ${key}: ${formatValue(val2, depth + 1)}`];
-    }
-    if (isObj1 && isObj2) {
+    if (_.isPlainObject(val1) && _.isPlainObject(val2))
       return [`${indent}    ${key}: ${diffStylish(val1, val2, depth + 1)}`];
-    }
-    if (val1 !== val2) {
+    if (!(key in obj2))
+      return [`${indent}  - ${key}: ${formatValue(val1, depth + 1)}`];
+    if (!(key in obj1))
+      return [`${indent}  + ${key}: ${formatValue(val2, depth + 1)}`];
+    if (val1 !== val2)
       return [
         `${indent}  - ${key}: ${formatValue(val1, depth + 1)}`,
         `${indent}  + ${key}: ${formatValue(val2, depth + 1)}`,
       ];
-    }
+
     return [`${indent}    ${key}: ${formatValue(val1, depth + 1)}`];
   });
 

@@ -15,30 +15,20 @@ function diffPlain(obj1, obj2, parentPath = '') {
     const val2 = obj2?.[key];
     const currentPath = parentPath ? `${parentPath}.${key}` : key;
 
-    const isObj1 = typeof val1 === 'object' && val1 !== null;
-    const isObj2 = typeof val2 === 'object' && val2 !== null;
-
-    if (!(key in obj2)) {
-      return [`Property '${currentPath}' was removed`];
+    if (_.isPlainObject(val1) && _.isPlainObject(val2)) {
+      return diffPlain(val1, val2, currentPath);
     }
-
-    if (!(key in obj1)) {
+    if (!(key in obj2)) return [`Property '${currentPath}' was removed`];
+    if (!(key in obj1))
       return [
         `Property '${currentPath}' was added with value: ${formatValue(val2)}`,
       ];
-    }
-
-    if (isObj1 && isObj2) {
-      return diffPlain(val1, val2, currentPath);
-    }
-
-    if (val1 !== val2) {
+    if (val1 !== val2)
       return [
         `Property '${currentPath}' was updated. From ${formatValue(
           val1,
         )} to ${formatValue(val2)}`,
       ];
-    }
 
     return [];
   });
