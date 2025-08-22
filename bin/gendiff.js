@@ -1,26 +1,30 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import gendiff from '../src/index.js';
+import diff from '../src/formatters/index.js';
 
-const program = new Command();
+const genDiff = (filepath1, filepath2, format = 'stylish') =>
+  diff(format, filepath1, filepath2);
 
-program
-  .name('gendiff')
-  .description('Compares two configuration files and shows a difference.')
-  .version('0.0.2')
-  .arguments('<filepath1> <filepath2>')
-  .option('-f, --format <type>', 'output format', 'stylish')
-  .action((filepath1, filepath2, options) => {
-    const diff = gendiff(filepath1, filepath2, options.format);
+const cliProgram = () => {
+  const program = new Command();
 
-    if (import.meta.url === `file://${process.argv[1]}`) {
-      console.log(diff);
-    }
+  program
+    .arguments('<filepath1> <filepath2>')
+    .description('Compares two configuration files and shows a difference.')
+    .version('1.0.0', '-V, --version', 'output the version number')
+    .option('-f, --format <type>', 'output format', 'stylish')
+    .action((filepath1, filepath2) => {
+      const options = program.opts();
+      console.log(genDiff(filepath1, filepath2, options.format));
+      return genDiff(filepath1, filepath2, options.format);
+    });
 
-    return diff;
-  });
+  return program;
+};
 
-program.parse(process.argv);
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const program = cliProgram();
+  program.parse(process.argv);
+}
 
-export default (filepath1, filepath2, format = 'stylish') =>
-  gendiff(filepath1, filepath2, format);
+export default genDiff;
