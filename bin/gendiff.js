@@ -11,7 +11,7 @@ program
   .option('-f, --format <type>', 'output format', 'stylish')
   .action((filepath1, filepath2) => {
     const options = program.opts();
-    console.log(genDiff(filepath1, filepath2, options.format));
+    console.log(genDiff(options.format, filepath1, filepath2));
   });
 
 if (import.meta.url === `file://${process.argv[1]}`) {
