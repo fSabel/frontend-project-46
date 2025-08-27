@@ -18,5 +18,6 @@ const diff = (formatName, filepath1, filepath2) => {
   }
 };
 
-export default (format, filepath1, filepath2) =>
-  diff(format, filepath1, filepath2);
+export default function genDiff(format, filepath1, filepath2) {
+  return diff(format, filepath1, filepath2);
+}
