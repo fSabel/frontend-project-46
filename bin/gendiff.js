@@ -2,7 +2,7 @@
 import { Command } from 'commander';
 import genDiff from '../src/formatters/index.js';
 
-const run = () => {
+const createProgram = () => {
   const program = new Command();
 
   program
@@ -15,6 +15,11 @@ const run = () => {
       console.log(genDiff(filepath1, filepath2, options.format));
     });
 
+  return program;
+};
+
+const run = () => {
+  const program = createProgram();
   program.parse(process.argv);
 };
 
