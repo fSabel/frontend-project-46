@@ -12,9 +12,9 @@ const readFixtureFile = (filename) =>
   fs.readFileSync(getFixturePath(filename), 'utf-8');
 
 test.each([
-  ['file1.json', 'file2.json', 'stylishJSON.txt'],
-  ['file1.yaml', 'file2.yml', 'stylishYaml.txt'],
-  ['file1.json', 'file2.yml', 'stylishYamlJson.txt'],
+  ['file1.json', 'file2.json', 'stylish.txt'],
+  ['file1.yaml', 'file2.yml', 'stylish.txt'],
+  ['file1.json', 'file2.yml', 'stylish.txt'],
 ])('gendiff with "stylish" format', (a, b, result) => {
   const stylish = 'stylish';
   const pathFirstFile = getFixturePath(a);
