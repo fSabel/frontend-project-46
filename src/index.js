@@ -1,11 +1,20 @@
+import path from 'path';
 import { cwd } from 'node:process';
 import fs from 'fs';
 import yaml from 'js-yaml';
-import path from 'path';
 import changeFormatter from './formatters/index.js';
 
+const getFixturePath = (filename) => {
+  const base = path.resolve(cwd(), '__fixtures__');
+  if (path.isAbsolute(filename)) return filename;
+  if (filename.startsWith('__fixtures__')) {
+    return path.resolve(cwd(), filename);
+  }
+  return path.resolve(base, filename);
+};
+
 const parsing = (fileIsStr) => {
-  const filePath = path.resolve(`${cwd()}`, '__fixtures__', fileIsStr);
+  const filePath = getFixturePath(fileIsStr);
   const fileFormat = path.extname(filePath).slice(1);
   const fileContent = fs.readFileSync(filePath, 'utf8').trim();
 
@@ -13,12 +22,14 @@ const parsing = (fileIsStr) => {
     case 'yaml':
     case 'yml':
       return yaml.load(fileContent);
-    default:
+    case 'json':
       return JSON.parse(fileContent);
+    default:
+      throw new Error(`Unsupported file format: ${fileFormat}`);
   }
 };
 
-const genDiff = (filepath1, filepath2, formatName) =>
+const genDiff = (filepath1, filepath2, formatName = 'stylish') =>
   changeFormatter(parsing(filepath1), parsing(filepath2), formatName);
 
 export default genDiff;
