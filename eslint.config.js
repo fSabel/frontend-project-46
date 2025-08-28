@@ -30,7 +30,7 @@ export default [
   ...compat.extends('airbnb-base'),
   {
     rules: {
-      indent: ['error', 2],
+      'indent': ['error', 2],
       'no-underscore-dangle': [
         'error',
         {
@@ -48,7 +48,6 @@ export default [
       'no-console': 'off',
       'import/no-extraneous-dependencies': 'off',
 
-      // 🔧 конфликтующие с Prettier
       '@stylistic/quote-props': 'off',
       '@stylistic/arrow-parens': 'off',
     },
