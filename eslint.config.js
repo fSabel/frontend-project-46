@@ -47,6 +47,10 @@ export default [
       'import/no-named-as-default-member': 'off',
       'no-console': 'off',
       'import/no-extraneous-dependencies': 'off',
+
+      // 🔧 конфликтующие с Prettier
+      '@stylistic/quote-props': 'off',
+      '@stylistic/arrow-parens': 'off',
     },
   },
   eslintConfigPrettier,

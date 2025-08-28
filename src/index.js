@@ -4,12 +4,12 @@ import fs from 'fs'
 import yaml from 'js-yaml'
 import changeFormatter from './formatters/index.js'
 
-const getFixturePath = filename => {
+const getFixturePath = (filename) => {
   if (path.isAbsolute(filename)) return filename
   return path.resolve(cwd(), '__fixtures__', filename)
 }
 
-const parsing = fileIsStr => {
+const parsing = (fileIsStr) => {
   const filePath = getFixturePath(fileIsStr)
   const fileFormat = path.extname(filePath).slice(1)
   const fileContent = fs.readFileSync(filePath, 'utf8').trim()

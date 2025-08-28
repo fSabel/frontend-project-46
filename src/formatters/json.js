@@ -1,9 +1,9 @@
 import _ from 'lodash'
 
 /** A function for finding differences in the "stylish" format */
-function json(obj1, obj2) {
+const json = (obj1, obj2) => {
   const keys = _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2)))
-  const result = keys.map(key => {
+  const result = keys.map((key) => {
     const val1 = obj1?.[key]
     const val2 = obj2?.[key]
 

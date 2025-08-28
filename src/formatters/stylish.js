@@ -13,10 +13,10 @@ function formatValue(value, depth) {
 }
 
 /** A function for finding differences in the "stylish" format */
-function diffStylish(obj1, obj2, depth = 0) {
+const diffStylish = (obj1, obj2, depth = 0) => {
   const keys = _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2)))
   const indent = ' '.repeat(depth * 4)
-  const result = keys.flatMap(key => {
+  const result = keys.flatMap((key) => {
     const val1 = obj1?.[key]
     const val2 = obj2?.[key]
 
