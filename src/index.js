@@ -5,12 +5,8 @@ import yaml from 'js-yaml';
 import changeFormatter from './formatters/index.js';
 
 const getFixturePath = (filename) => {
-  const base = path.resolve(cwd(), '__fixtures__');
   if (path.isAbsolute(filename)) return filename;
-  if (filename.startsWith('__fixtures__')) {
-    return path.resolve(cwd(), filename);
-  }
-  return path.resolve(base, filename);
+  return path.resolve(cwd(), '__fixtures__', filename);
 };
 
 const parsing = (fileIsStr) => {
