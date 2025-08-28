@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>14/14</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -85,43 +85,25 @@
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L23'></a><a href='#L23'>23</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">87x</span>
+<span class="cline-any cline-yes">87x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">72x</span>
-<span class="cline-any cline-yes">72x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">72x</span>
-<span class="cline-any cline-yes">72x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">72x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">64x</span>
-<span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">44x</span>
-<span class="cline-any cline-yes">16x</span>
-<span class="cline-any cline-yes">28x</span>
-<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">87x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">69x</span>
+<span class="cline-any cline-yes">60x</span>
+<span class="cline-any cline-yes">39x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -130,26 +112,17 @@
 /** A function for finding differences in the "stylish" format */
 function json(obj1, obj2) {
   const keys = _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2)));
-  const result = {};
-&nbsp;
-  keys.forEach((key) =&gt; {
+  const result = keys.map((key) =&gt; {
     const val1 = obj1?.[key];
     const val2 = obj2?.[key];
 &nbsp;
-    const isObj1 = typeof val1 === 'object' &amp;&amp; val1 !== null;
-    const isObj2 = typeof val2 === 'object' &amp;&amp; val2 !== null;
+    if (_.isPlainObject(val1) &amp;&amp; _.isPlainObject(val2))
+      return { key, type: 'nested', children: json(val1, val2) };
+    if (!(key in obj2)) return { key, type: 'deleted', val1 };
+    if (!(key in obj1)) return { key, type: 'added', val2 };
+    if (val1 !== val2) return { key, type: 'changed', val1, val2 };
 &nbsp;
-    if (!(key in obj2)) {
-      result[key] = val1;
-    } else if (!(key in obj1)) {
-      result[key] = val2;
-    } else if (isObj1 &amp;&amp; isObj2) {
-      result[key] = json(val1, val2);
-    } else if (val1 !== val2) {
-      result[key] = [val1, val2];
-    } else {
-      result[key] = val1;
-    }
+    return { key, type: 'unchanged', val1 };
   });
 &nbsp;
   return result;
@@ -163,7 +136,7 @@ export default json;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T10:50:57.595Z
+                at 2025-08-28T07:20:20.650Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
