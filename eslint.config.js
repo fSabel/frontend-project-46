@@ -1,18 +1,18 @@
-import globals from "globals";
+import globals from 'globals'
 
-import path from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-import pluginJs from "@eslint/js";
-import eslintConfigPrettier from "eslint-config-prettier";
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { FlatCompat } from '@eslint/eslintrc'
+import pluginJs from '@eslint/js'
+import eslintConfigPrettier from 'eslint-config-prettier'
 
 // mimic CommonJS variables -- not needed if using CommonJS
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 const compat = new FlatCompat({
   baseDirectory: __dirname,
   recommendedConfig: pluginJs.configs.recommended,
-});
+})
 
 export default [
   {
@@ -22,32 +22,32 @@ export default [
         ...globals.jest,
       },
       parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
+        ecmaVersion: 'latest',
+        sourceType: 'module',
       },
     },
   },
-  ...compat.extends("airbnb-base"),
+  ...compat.extends('airbnb-base'),
   {
     rules: {
-      indent: ["error", 2],
-      "no-underscore-dangle": [
-        "error",
+      indent: ['error', 2],
+      'no-underscore-dangle': [
+        'error',
         {
-          allow: ["__filename", "__dirname"],
+          allow: ['__filename', '__dirname'],
         },
       ],
-      "import/extensions": [
-        "error",
+      'import/extensions': [
+        'error',
         {
-          js: "always",
+          js: 'always',
         },
       ],
-      "import/no-named-as-default": "off",
-      "import/no-named-as-default-member": "off",
-      "no-console": "off",
-      "import/no-extraneous-dependencies": "off",
+      'import/no-named-as-default': 'off',
+      'import/no-named-as-default-member': 'off',
+      'no-console': 'off',
+      'import/no-extraneous-dependencies': 'off',
     },
   },
   eslintConfigPrettier,
-];
+]
