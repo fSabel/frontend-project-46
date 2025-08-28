@@ -14,8 +14,6 @@ program
     console.log(genDiff(filepath1, filepath2, options.format));
   });
 
-if (import.meta.url === `file://${process.argv[1]}`) {
-  program.parse(process.argv);
-}
+program.parse(process.argv);
 
 export default program;
