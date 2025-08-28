@@ -1,11 +1,8 @@
-import parsing from '../index.js';
 import stylish from './stylish.js';
 import plain from './plain.js';
 import json from './json.js';
 
-function genDiff(formatName, filepath1, filepath2) {
-  const obj1 = parsing(filepath1);
-  const obj2 = parsing(filepath2);
+function changeFormatter(formatName, obj1, obj2) {
   switch (formatName) {
     case 'plain':
       return plain(obj1, obj2);
@@ -14,8 +11,8 @@ function genDiff(formatName, filepath1, filepath2) {
     case 'stylish':
       return stylish(obj1, obj2);
     default:
-      throw new Error('Uncorrect format!');
+      throw new Error(`Uncorrect format ${formatName}!`);
   }
 }
 
-export default genDiff;
+export default changeFormatter;

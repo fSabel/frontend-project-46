@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "type": "module",
-  "main": "bin/gendiff.js",
+  "main": "src/index.js",
   "description": "[![Actions Status](https://github.com/fSabel/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/fSabel/frontend-project-46/actions)",
   "scripts": {
     "test:watch": "jest --watch",
